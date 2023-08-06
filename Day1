@@ -1,12 +1,46 @@
+Programming languages C, C++, JAVA
+
+Operating system - Windows, Unix(Solaris, Linux, Ubuntu)
 
 1) Introduction to JAVA
-    C - Procedure Oriented language
-	C++ - Object Oriented language
-	Java - Pure Object Oriented language
+    C - Procedure Oriented language - Platform dependent
+	C++ - Object Oriented language - Platform dependent
+	Java - Pure Object Oriented language - Platform independent
 	
 2) Compilation and Platform Independent
+    JDK - Java development Kit
+	JRE - Java Runtime environment
+	
+	Class --> methods (main - default)
+	
+	Java program --> save --> HelloWorld.java
+	
+	C:\Program Files\Java\jdk-1.8  bin (javac, java)
+	
+	Command Prompt
+	C:\Users\HP>java -version
+    java version "1.8.0_381"
+    Java(TM) SE Runtime Environment (build 1.8.0_381-b09)
+    Java HotSpot(TM) 64-Bit Server VM (build 25.381-b09, mixed mode)
+	
+	JDK: C:\Program Files\Java\jdk-1.8\bin (compilation and Execution)
+	JRE: C:\Program Files\Java\jre-1.8\bin (Only Execution)
+	
+	2 steps:
+	Compilation - javac(java compiler) --> D:\Java>javac HelloWorld.java --> ouput (HelloWorld.class)
+	Execution   - java --> HelloWorld.class --> D:\Java>java HelloWorld --> 
+	
+	HelloWorld.class --> ByteCode --> runs in any environment --> platform independent
+	
+	Java 8
+	Java 11
+	
+	Java - Sun Microsystems - Oracle Corporation
+	
+	https://www.oracle.com/in/java/technologies/downloads/
 
-3) OOPS Concepts
+
+3) OOPS(Object Oriented Programming) Concepts
      Class
 	 Objects --> Instances of Class
 	 Data Abstraction --> Abstraction is a process which displays only the information needed and hides the unnecessary information. 
