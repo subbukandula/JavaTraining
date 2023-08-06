@@ -1,0 +1,20 @@
+
+1) Introduction to JAVA
+    C - Procedure Oriented language
+	C++ - Object Oriented language
+	Java - Pure Object Oriented language
+	
+2) Compilation and Platform Independent
+
+3) OOPS Concepts
+     Class
+	 Objects --> Instances of Class
+	 Data Abstraction --> Abstraction is a process which displays only the information needed and hides the unnecessary information. 
+	                 We can say that the  main purpose of abstraction is data hiding
+					    Interface or abstract class
+	 Encapsulation --> it is the process that binds together the data and code into a single unit and keeps both from being safe from 
+	                   outside interference and misuse. 
+	                   In this process, the data is hidden from other classes and can be accessed only through the current class’s methods
+	 Inheritance --> Inheritance is a method in which one object acquires/inherits another object’s properties, and inheritance also 
+	                 supports hierarchical classification
+	 Polymorphism --> Polymorphism refers to many forms, or it is a process that performs a single action in different ways
