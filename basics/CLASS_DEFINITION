@@ -1,0 +1,30 @@
+==============================================================================
+
+Class --> Java Program
+
+- keyword -> class
+- variables
+- methods --> which is used to act on variables
+
+method signature:
+
+public int add() {
+				
+}
+
+public - access modifier
+return type - what you want to return from method (int --> method will return integer value)
+method name (starts with small letter) --> followed with ()
+parameters
+
+=================================================================================
+
+primitive data types  
+(int)
+
+NUMBER --> 0-9 --> int
+CHAR --> a to z, special characters
+FLOAT --> 1.1, 2.6, 4.5
+BOOLEAN --> false or true
+
+==================================================================================
