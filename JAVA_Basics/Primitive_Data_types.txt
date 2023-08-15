@@ -1,0 +1,64 @@
+Java Primitive Data Types
+
+There are following primitive data types available in Java programming language.
+
+Byte Data Type:
+- It is the first data type with least memory size allocation which can be used for numbers of small ranges.
+- The memory size is allocated 1 byte.
+- It can represent a total 256(2 power 8).
+- Byte can represent from 0 to 127 on positive side (as zero is positive number per programming) and on the negative side it can represent the number -1 to 128.
+- The default value for byte is zero (0).
+
+       Example:- byte a1 = 10;
+
+Int Data Type:
+- The int data type is a 32-bits signed type. Minimum value of int data type is -2,147,483,648 and maximum value of int data type is 2,147,483,647 precision
+type.
+- Its default value is 0.
+- On the positive side 0 to 2,147,483,647 and on the negative side -1 to 2,147,483,647
+- It can represent a total of 4,294,967,296
+	
+	Example:- int a = 100000;
+ 		  int b = -200000;
+
+Short Data Type:
+- The short data type is a 16-bit signed type. Its value-range lies between -32,768 to 32,767. Minimum value of short is -32,768 and maximum value
+of short is 32,767.
+- Its default value is 0.
+- It can represent total 65536(216) numbers.
+
+	Example:- short s = 10000;
+
+Boolean Data Type: 
+- The boolean data type is a one bit information. Only two possible values are of Boolean data type. Which are true and false.
+- It has not something range of values of the variable.
+- The values true or false are case-sensitive keywords.
+
+	Example:- boolean a = false; boolean b=true;
+
+
+Char Data Type:
+- It has a single 16-bit Unicode character. Value-range of char data type lies between -127 to 128 .The char data type is used to store characters.
+- It stores a single character such as a letter, number and punctuation mark or other symbol.
+- Characters are a single letter enclosed in single quotes.
+
+	Example:- char b = 'A'; char a=’#’;
+
+Double Data Type:
+- Double data type is a 64 bits signed type. Its value range is unlimited. The double data type is generally used for decimal (points) values just like float. The double data type does not use for precise values, such as currency.
+Its default value is 0.0d.
+
+	Example:- double d1 = 122.39;
+
+Float Data Type:
+- The float data type has a single-precision 32-bits types and its value range is unlimited.
+- Its default value is 0.0F.
+	
+	Example:- float f1 = 134.5f;
+
+Long Data Type:
+- It has a 64-bit two's complement integer.
+- Minimum value long data type is - 9,223,372,036,854,775,808 and maximum value of long data type is 9,223,372,036,854,775,807.
+- Its default value is 0.
+
+	Example:- long a = 100000L;

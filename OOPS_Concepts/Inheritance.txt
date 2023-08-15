@@ -20,11 +20,7 @@ Single:
 multilevel
 Herirachial   
 
-
 - Multiple inheritance is not supported in Java through class.
-
-
-
 
 
 Example:
