@@ -1,0 +1,49 @@
+Inheritance
+
+Defination:
+-----------
+Inheritance is a method in which one object acquires/inherits another object’s properties, and inheritance also supports hierarchical classification.
+					 
+					 
+Types of Inheritance: 
+---------------------
+Single, multilevel, Herirachial   (multiple inheritance -- java won't support)
+
+
+
+
+
+Example:
+--------
+abstract class Animal {
+
+    private String name;
+ 
+    public Animal(String name) { this.name = name; }
+ 
+    public abstract void makeSound();
+ 
+    public String getName() { return name; }
+}
+ 
+// Abstracted class
+class Dog extends Animal {
+    public Dog(String name) { super(name); }
+ 
+    public void makeSound()
+    {
+        System.out.println(getName() + " barks");
+    }
+}
+ 
+// Abstracted class
+class Cat extends Animal {
+    public Cat(String name) { super(name); }
+ 
+    public void makeSound()
+    {
+        System.out.println(getName() + " meows");
+    }
+}
+					 
+	

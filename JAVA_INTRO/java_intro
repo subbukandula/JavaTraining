@@ -6,8 +6,10 @@ Operating system - Windows, Unix(Solaris, Linux, Ubuntu)
     C - Procedure Oriented language - Platform dependent
 	C++ - Object Oriented language - Platform dependent
 	Java - Pure Object Oriented language - Platform independent
+
+2) Features of JAVA
 	
-2) Compilation and Platform Independent
+3) Compilation and Platform Independent
     JDK - Java development Kit
 	JRE - Java Runtime environment
 	
@@ -40,8 +42,8 @@ Operating system - Windows, Unix(Solaris, Linux, Ubuntu)
 	https://www.oracle.com/in/java/technologies/downloads/
 
 
-3) OOPS(Object Oriented Programming) Concepts
-     Class
+4) OOPS(Object Oriented Programming) Concepts
+         Class
 	 Objects --> Instances of Class
 	 Data Abstraction --> Abstraction is a process which displays only the information needed and hides the unnecessary information. 
 	                 We can say that the  main purpose of abstraction is data hiding

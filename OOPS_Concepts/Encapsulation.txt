@@ -1,0 +1,31 @@
+Encapsulation
+
+Defination:
+- It is the process that binds together the data and code into a single unit and keeps both from being safe from outside interference and misuse. 
+- In this process, the data is hidden from other classes and can be accessed only through the current class’s methods
+					   
+Example:
+-------				   
+public class Car{
+	
+	private String carName;  //variables
+	private String carModel;
+	
+	public void setCarName(String carName){   //method
+	    this.carName = carName;
+	}
+	
+	public void setCarModel(String carModel){
+	    this.carModel = carModel;
+	}
+	
+	public static void main(Sting args[]){ // main method
+	   
+	   Car car = new Car();   //object creation --> using new keyword
+	   
+	   car.setCarName("Creta");
+	   car.setCarModel("Huyndai")
+	
+	}
+	
+}
