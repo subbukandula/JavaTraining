@@ -1,11 +1,36 @@
 Encapsulation
 
 Defination:
+- Encapsulation is a fundamental concept in object-oriented programming (OOP) that refers to the bundling of data and methods that operate on that data within a single unit, which is called a class in Java
+- Encapsulation is a way of hiding the implementation details of a class from outside access and only exposing a public interface that can be used to interact with the class
 - It is the process that binds together the data and code into a single unit and keeps both from being safe from outside interference and misuse. 
 - In this process, the data is hidden from other classes and can be accessed only through the current class’s methods
+- It is a process of wrapping code and data together into a single unit
+- We can create a fully encapsulated class in Java by making all the data members of the class private. Now we can use setter and getter methods to set and get the data in it.
 					   
 Example:
--------				   
+-------	
+
+//A Java class which is a fully encapsulated class.  
+//It has a private data member and getter and setter methods.  
+package com.javatpoint;  
+
+public class Student{  
+
+	//private data member  
+	private String name;  
+
+	//getter method for name  
+	public String getName(){  
+		return name;  
+	}  
+
+	//setter method for name  
+	public void setName(String name){  
+		this.name=name  
+	}  
+}  
+			   
 public class Car{
 	
 	private String carName;  //variables

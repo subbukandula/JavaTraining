@@ -2,12 +2,26 @@ Inheritance
 
 Defination:
 -----------
-Inheritance is a method in which one object acquires/inherits another object’s properties, and inheritance also supports hierarchical classification.
+- Inheritance is a method in which one object acquires/inherits another object’s properties, and inheritance also supports hierarchical classification.
+- It is the mechanism in Java by which one class is allowed to inherit the features(fields and methods) of another class
+- The new class that is created is known as subclass (child or derived class) and the existing class from where the child class is derived is known as superclass (parent or base class).
+- The extends keyword is used to perform inheritance in Java
+
+Why Do We Need Java Inheritance
+-------------------------------
+- Code Reusability: The code written in the Superclass is common to all subclasses. Child classes can directly use the parent class code.
+- Method Overriding: Method Overriding is achievable only through Inheritance. It is one of the ways by which Java achieves Run Time Polymorphism.
+- Abstraction: The concept of abstract where we do not have to provide all details is achieved through inheritance. Abstraction only shows the functionality to the user.
 					 
 					 
 Types of Inheritance: 
 ---------------------
-Single, multilevel, Herirachial   (multiple inheritance -- java won't support)
+Single:
+multilevel
+Herirachial   
+
+
+- Multiple inheritance is not supported in Java through class.
 
 
 
