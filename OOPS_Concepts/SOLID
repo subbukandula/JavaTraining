@@ -1,0 +1,1112 @@
+👨‍💻 About the Instructor
+=======================
+Pragy
+Senior Software Engineer + Instructor @ Scaler
+https://www.linkedin.com/in/agarwalpragy/
+💎 Key Takeaways
+================
+✅ In-depth understanding of SOLID principles
+✅ Walk-throughs with examples
+✅ Practice quizzes & assignment
+❓ FAQ
+======
+▶️ Will the recording be available?
+ To Scaler students only
+✏️ Will these notes be available?
+ Yes. Published in the discord/telegram groups (link pinned in chat)
+⏱️ Timings for this session?
+ 7.30pm - 10.30pm (3 hours) [15 min break midway]
+🎧 Audio/Video issues
+ Disable Ad Blockers & VPN. Check your internet. Rejoin the session.
+❔ Will Design Patterns, topic x/y/z be covered?
+ In upcoming masterclasses. Not in today's session.
+ Enroll for upcoming Masterclasses @ [scaler.com/events]
+(https://www.scaler.com/events)
+🖥️ What programming language will be used?
+ The session will be language agnostic. I will write code in Java.
+ However, the concepts discussed will be applicable across languages
+💡 Prerequisites?
+ Basics of Object Oriented Programming
+-----------------------------------------------------------------------------
+✅ Goals
+========
+>
+> ❓ What % of your work time is spend writing new code?
+>
+> • 10-15% • 15-40% • 40-80% • > 80%
+< 15% of a dev's time is spent writing fresh code!
+#### ⏱️ Where does the rest of the time go?
+- Learning and Research
+ - reading other people's code
+ - going through documentation
+ - discussions
+ - tutorials
+ - chatGPT
+ - stackoverflow
+- Code Reviews (PRs)
+- Debugging, Refactoring, Maintenance
+- Collaboration and Meetings
+ - Scrum
+ - Jira
+- Testing and QA
+- Documentation
+- DevOps and CI/CD
+good time
+- Breaks: play TT, play snooker, chai, ..
+I want to maximize my good time!
+I need to ensure that any work that I do is very high quality
+#### We'd like to make our code - measuring quality
+1. Readable
+2. Extensible
+3. Testable
+4. Maintainable
+Do we really need to learn this?
+===================
+💎 SOLID Principles
+===================
+- Single Responsibility Principle (SRP)
+- Open/Closed Principle (OCP)
+- Liskov's Substitution Principle
+- Interface Segregation Principle (ISP)
+- Dependency Inversion Principle (DIP)
+Dependency Injection (also important!)
+Inversion of Control
+💭 Context
+==========
+Creating a full blown app is very time consuming.
+Start with a toy example that clearly demonstrates each concept.
+- Build a Zoo Computer Game 🦊
+- Think about modeling characters (visitors/zoo staff/animals)
+- Think about modeling structures (cages)
+Programming language: pseudocode (made up language)
+I will use Java syntax highlighting - but the code that I write will NOT be
+java
+Modern programming languages
+ - Javascript (typescript/...)
+ - Python
+ - Java / Kotlin
+ - C#
+ - C++
+ - PhP
+ - Ruby
+ - Swift
+ - Dart
+ - Go / Rust (these do NOT support OOP)
+SOLID principles apply to any modern programming language that supports
+Object Oriented Programming (OOP)
+-----------------------------------------------------------------------------
+OOP: concept => class
+🎨 Design a Character
+======================
+- visitors
+- animals
+- staff
+```java
+class ZooEntity {
+ // attributes - properties (data members)
+ // Staff
+ String name;
+ Gender gender;
+ Integer age;
+ Double salary;
+ String designation;
+ String department;
+ // ...
+ // Animal
+ String name;
+ Gender gender;
+ Integer age;
+ Boolean eatsMeat;
+ Boolean canFly;
+ // Visitor
+ String name;
+ Gender gender;
+ Ticket ticket;
+ Boolean isVIP;
+ DateTime timeOfArrival;
+ // methods - behavior
+ // Staff
+ void sleep();
+ void cleanPremises();
+ void eat();
+ void poop();
+ void feedAnimals();
+ // Animal
+ void sleep();
+ void eat();
+ void poop();
+ void fly();
+ void fight();
+ void eatTheVisitor();
+ // Visitor
+ void roamAround();
+ void eat();
+ void petAnimals();
+ void getEatenByAnimals();
+}
+class ZooEntityTester {
+ void testAnimalEats() {
+ ZooEntity simba = new ZooEntity(...);
+ simba.eat(...);
+ // check if the behavior was as intended
+ }
+}
+```
+Minor Issue:
+- name conflicts
+ - easy to fix: just rename the variables
+ - `name` => `staffName`, `visitorName`, `animalName`
+🐞 Problems with the above code?
+❓ Readable
+ Yes, I can totally read & understand this code!
+ But what if tomorrow, we have to add more types of visitors
+ code will become very complex
+ But what if tomorrow, we have to add more types of animals
+ birds / snakes / ...
+ code will be very large
+ You need to read the entire class (massive) to understand anything!
+❓ Testable
+
+ Yes, I can write testcases for it.
+ sleep() for animal can modify age of staff.
+ there can be side effects
+ Testing is hard, because we have weird / unexpected results
+❓ Extensible
+ We will come back to this
+❓ Maintainable
+ Deepto: Animals
+ Ajayraj: Staff
+ Sejal: Visitors
+ all 3 devs are working on the same file.
+ commit - push - merge conflicts!
+🤔 What is the main reason for all these issues?
+This class is trying to do too many things!
+🛠️ How to fix this?
+==================================
+⭐ Single Responsibility Principle
+==================================
+- Any class/fuction/module/package (unit-of-code) should have a single, welldefined responsibility
+ - single: not more than that
+ - well-defined: not be vague
+- (aka) Any piece of code should have only 1 reason to change
+🛠️ How to fix this?
+Use OOP: inheritance (helps us break a large class into specialized
+subclasses)
+```java
+class ZooCharacter {
+ String name;
+ Integer age;
+ Gender gender;
+ void eat();
+ void poop();
+ void sleep();
+}
+class Staff extends ZooCharacter {
+ String designation;
+ Double salary;
+ void cleanPremises();
+}
+class Visitor extends ZooCharacter {
+ String ticketID;
+ void roamAround();
+}
+class Animal extends ZooCharacter {
+ Boolean canFly;
+ String species;
+ void eatTheVisitor();
+}
+```
+Did we improve on any of the metrics?
+Did we solve any of the issues?
+❓ Readable
+ Don't we have too many classes now?
+ Yes we do have more classes now!
+ Isn't that an issue?
+ Any dev is working on a handful of features at any given time
+ You need to read & work with a few classes/files at any given time
+ And all these classes are tiny, simple, easy to understand!
+ Yes, the code is more readable now!
+❓ Testable
+ Can a change in Staff.method() effect the behavior of Animal?
+ No
+ My code is now de-coupled. Reduced side effects / unintended consequences
+ More testable code now!
+❓ Extensible
+ (for later)
+❓ Maintainable
+
+ Now the 3 devs are working on different files
+ Reduced the conflicts significantly!
+So is the code perfect now?
+ No.
+Did we take a step in the right direction?
+ Certainly yes! We improved on all the metrics, by making a very simple
+change: SRP
+-----------------------------------------------------------------------------
+Towards the class end, I will give you assignments: to help you practice!
+-----------------------------------------------------------------------------
+🐦 Design a Bird
+================
+```java
+// don't clutter the Animal class: follow SRP
+// break the animal class into subclasses: Bird / Reptile / Mammal / ..
+class Bird extends Animal {
+ // inherits the attributes from parent classes
+ // String species;
+ void fly() {
+ !! what should we do here?
+ }
+}
+```
+🕊️ different birds fly differently!
+```java
+class Bird extends Animal {
+ // String species; // inherited
+ void fly() {
+ if (species == "sparrow")
+ print("Flaps wings quickly and flies low")
+ else if (species == "pigeon")
+ print("Fly over people's heads, and poop on them")
+ else if (species == "eagle")
+ print("Glide high above elegantly")
+ }
+}
+```
+Too many responsibilities - violates SRP.
+🐞 Problems with the above code?
+- Readable
+- Testable
+- Maintainable
+- Extensible - FOCUS!
+❓ Do we always write all code ourselves from scratch?
+ No. You use builtin / external libraries
+```java
+[PublicZooLibary] {
+ class Animal {
+ String species;
+ }
+ class Bird extends Animal {
+ void fly() {
+ if (species == "sparrow")
+ print("Flaps wings quickly and flies low")
+ else if (species == "pigeon")
+ print("Fly over people's heads, and poop on them")
+ else if (species == "eagle")
+ print("Glide high above elegantly")
+ }
+ }
+}
+[MyCustomGame] {
+ import PublicZooLibary.Animal;
+ import PublicZooLibary.Bird;
+ class MyZooGame {
+ void main() {
+ Bird tweety = new Bird("pigeon");
+ tweety.fly();
+ }
+ }
+}
+```
+If I need to add a new type of bird - Peacock - how can I achieve this?
+❓ Do we always have modification access?
+
+ I can't modify the public library
+ - the source code is available, but I'm not the author, so I can't
+freely modify it
+ - libraries can also be shipped as compiled binaries
+ - dll, exe, com, so, pyc, jar, war
+ - source code is not available
+❓ How can we add a new type of Bird?
+
+ without even having modification access!?
+🛠️ How to fix this?
+=======================
+⭐ Open/Close Principle
+=======================
+- Code should be open for extension, but it should be closed for
+modification!
+ - extension: add new functionality (without changing existing code)
+ - modification: modify existing code to add new functionality
+❔ Why should code be "closed" for modification?
+❔ Why is it bad to modify existing code?
+#### Development Pipeline in large companies (Google - 5 billion users)
+- Developer
+ - write code on their laptop
+ - test it locally
+ - commit & push & generate a Pull Request (PR)
+- PR will go for review
+ - other devs in the team will suggest improvements
+ - the dev will go and make changes to make those improvements
+ - they will re-raise the PR
+ - re-review
+ - (iterative process)
+ - PR gets merged
+- Quality Assurance
+ - write extra unit tests
+ - write integration tests
+ - UI: manual testing
+ - update the docs
+- Deployment Pipeline
+ + Staging servers
+ - will ensure that the code doesn't break
+ - there will be a lot of testing (unit/integration) & stress-testing
+ + Production servers
+ * A/B test
+ - deploy to only 5% of the users
+ - we will monitor a lot of metrics
+ - number of exception
+ - customer satisfaction
+ - number of purchases
+ - ...
+ * Deploy to 100% of the userbase
+How much time does all this take?
+ More than one month!
+```java
+[PublicZooLibary] {
+ class Animal {
+ String species;
+ }
+ abstract class Bird extends Animal {
+ abstract void fly()
+ }
+ class Sparrow extends Bird {
+ void fly() {
+ print("Flaps wings quickly and flies low")
+ }
+ }
+ class Pigeon extends Bird {
+ void fly() {
+ print("Fly over people's heads, and poop on them")
+ }
+ }
+ class Eagle extends Bird {
+ void fly() {
+ print("Glide high above elegantly")
+ }
+ }
+}
+[MyCustomGame] {
+ import PublicZooLibary.Animal;
+ import PublicZooLibary.Bird;
+ import PublicZooLibary.Sparrow;
+ class Peacock extends Bird {
+ void fly() {
+ print("Female pehens can fly, but male peacocks can't")
+ }
+ }
+ class MyZooGame {
+ void main() {
+ Sparrow tweety = new Sparrow();
+ tweety.fly();
+ Peacock pea = new Peacock();
+ pea.fly();
+ }
+ }
+}
+```
+- Was I able to add a new Bird type?
+ Yes, easily
+- Did I have to change existing code?
+ - Didn't we modify the original Bird class?
+ Not really
+ OCP says: your code should be designed with extension in mind from the
+first-day
+ Write your code in such a way that anyone can add new features, even if
+they don't have modification access!
+❔ Isn't this the same thing that we did for Single Responsibility as well?
+ SRP: large class - broke it down into multiple subclasses using
+inheritance
+ OCP: large class - broke it down into multiple subclasses using
+inheritance
+❔ Does that mean that OCP == SRP?
+ No! Solution was to use OOP
+ But the intent was different
+ SRP intent: reduce the code complexity by separating concerns
+ OCP intent: improve the extensibility by allowing external developers to
+add new functionality without modification access
+🔗 All the SOLID principles are tighly linked together. If you implement one,
+you might get others for free!
+Uncle Bob (Robert C. Martin)
+-----------------------------------------------------------------------------
+## Salary
+- position: Staff Engineer / Principle Architect (10+ years of experience)
+- company: Google / Amazon (tier-1)
+- location: Bengaluru / Hyderabad (India)
+upto 3 Cr per annum!
+Why would a company pay this much to 1 developer?
+ A "good" developer is able to anticipate future requirement changes!
+ OCP: design your code in a manner today, so that if the requirements
+change tomorrow, you don't have to modify your existing code!
+Google:
+ - massive projects: millions of lines of code
+ - 100+ devs on the same project
+ - projects lasts 10+ years
+ - devs join / devs leave
+ - different devs have different skills
+1. Data Structures & Algorithms
+2. Basics of computing - OS/DBMS/CN
+3. Low Level Design (Code quality)
+ - required even for entry level devs at good companies
+4. High Level Design (Deployment Architecture & Scalability)
+ - senior devs
+Scaler LLD Cucciculum - 2 months
+================================
+Topics to learn to master Low Level Design
+- Object Oriented Programming
+ - inheritance
+ - abstraction
+ - encapsulation
+ - generalization
+ - polymorphism
+ - multiple vs multi-level inheritence
+ - Diamond problem & MRO
+ - composition over inheritance
+ - interfaces / abstract classes
+- SOLID Principles
+- Design Patterns
+ - Structural / Behavioral / Creational
+ - builder / singleton / factory / strategy / adapter / proxy / ...
+- Database Schema design
+ - model various entities
+ - model relationships
+ - indexes
+ - constraints
+- Entities & Relationships (ER Diagram / Class Diagram)
+- Case Studies
+ - Tic Tac Toe
+ - Chess
+ - Snake Ladder
+ - Parking Lot
+ - Splitwise
+ - Library Management
+- Testing & Test Driven Developement
+- REST API
+ - idempotency
+ - naming conventions
+### How do you know if you're learning the right thing?
+What if you end up learning the thing incorrectly?
+ Builder Pattern - how to implement this in Python?
+ Builder pattern
+ - works around language limitations
+ - java does not have the following features
+ - named arguments
+ - change the position of arguments
+ - validation for arguments
+ - default values for arguments
+ - you use builder pattern in java to work around these issues
+ - python/JS/C++/Kotlin: has all these features out of the box
+### Solution
+Always have a mentor who know what the correct thing is and can guide you on
+the correct thing
+Where to learn this?
+1. Free Masterclasses with certifications: https://www.scaler.com/events
+2. Free courses with certifications: https://www.scaler.com/topics/
+3. Comprehensive Program with Masters degree: https://www.scaler.com/academy/
+-----------------------------------------------------------------------------
+Break - 9:00 PM - 9.10 PM
+quick 10 mins break
+resuming sharp at 9.10!
+-----------------------------------------------------------------------------
+🐓 Can all Birds fly?
+=====================
+```java
+abstract class Bird extends Animal {
+ abstract void fly();
+}
+class Sparrow extends Bird {
+ void fly() {
+ print("flap wings and fly low")
+ }
+}
+class Pigeon extends Bird {
+ void fly() {
+ print("fly on top of people and poop on their heads")
+ }
+}
+class Eagle extends Bird {
+ void fly() {
+ print("glide elegantly high above")
+ }
+}
+class Kiwi extends Bird {
+ void fly() {
+ ! what do we do here?
+ }
+}
+```
+Flightless Birds:
+ penguins, ostrich, emu, dodo, turkeys, ...
+> ❓ How do we solve this?
+>
+> • Throw exception with a proper message
+> • Don't implement the `fly()` method
+> • Return `null`
+> • Redesign the system
+🏃‍♀️ Run away from the problem - Simply don't implement the `void fly()`
+```java
+abstract class Bird {
+ abstract void fly();
+}
+class Kiwi extends Bird {
+ // no void fly here
+}
+```
+🐞 Compiler Error: `class Kiwi` must implement `abstract void fly()`
+`abstract`: contract - you're telling the compiler that this "concept" is
+incomplete
+A subclass of abstract class should either implement all the abstract methods
+(to complete the blueprint) or should itself be abstract (incomplete)
+⚠️ Throw a proper exception!
+```java
+abstract class Bird {
+ abstract void fly();
+}
+class Kiwi extends Bird {
+ void fly() {
+ throw new FlightlessBirdException("I'm a kiwi bro, me no fly!")
+ }
+}
+```
+🐞 Violates Expectations!
+Ahmen - CTO of ZooGameCompany!
+```java
+abstract class Bird {
+ abstract void fly();
+}
+class Sparrow extends Bird {
+ void fly() {
+ print("flap wings and fly low")
+ }
+}
+class Pigeon extends Bird {
+ void fly() {
+ print("fly on top of people and poop on their heads")
+ }
+}
+class ZooGame {
+ // Runtime Polymorphism
+ //
+ // (variable) (object)
+ // Bird b = new Sparrow()
+ // b: variable of type Bird
+ // obj: of type Sparrow
+ // can I store an object of type Sparrow in a variable of type Bird?
+ // YES!
+ // because a Sparrow is-a Bird
+ // anything that a Bird can do, a Sparrow can also do that
+ Bird getBirdObjectFromUserSelection() {
+ // shows a UI to the user
+ // shows the different bird types
+ // user selects a bird type
+ // create an object of that bird type
+ // return
+ /**
+ * if (userSelection == "Sparrow")
+ * return new Sparrow()
+ * else if (userSelection == "Eagle")
+ * return new Eagle()
+ */
+ }
+ void main() {
+ Bird b = getBirdObjectFromUserSelection();
+ b.fly();
+ }
+}
+```
+✅ Before extension
+1. Does this code work?
+ Flawlessly!
+ Dev / Client / CEO - everyone is happy!
+An intern (Pragy) comes to the company - and implements the class Kiwi
+```java
+class Kiwi extends Bird {
+ void fly() {
+ throw new FlightlessBirdException("Kiwi no fly bro")
+ }
+}
+```
+❌ After extension
+- Did you modify your existing code?
+ No. I created a new class
+- Are you aware of the fact that someone has made this change?
+ Most likely no.
+- Was the code working before this addition was made?
+ Original Ahmed's code was working
+- Is the code working now?
+ No!
+ Because Kiwi got added, the `getBirdObjectFromUserSelection()` can now
+also return a Kiwi object.
+ `b.fly()` on kiwi - will fail!
+- Is the intern's code failing?
+ My code does what it is supposed to do
+- Whose code is failing?
+ Ahmed's code is failing!
+WTF!!! Black magic!
+==================================
+⭐ Liskov's Substitution Principle
+==================================
+- mathematical definition: Any object of `class Parent` should be replacable
+with any object of `class Child extends Parent` without causing any issues
+- Indian intuition:
+ - Parents set expectations: 'my kid will be a doctor!'
+ - Children: must not violate tghe expectations set by the parents
+Solution: parents should set sensible expectations
+Another example
+```java
+class Formatter {
+ String format(Object obj) {
+ // format that object
+ }
+}
+class JSONFormatter extends Formatter {
+ @Override
+ JSON format(Object obj) {
+ // This violates Liskov Substitution
+ // child's return type is different!
+ }
+}
+```
+🎨 Redesign the system!
+```java
+abstract class Bird extends Animal {
+ // Because we know that not all Birds can fly, we cannot put the abstract
+void fly() in the Bird class
+ abstract poop() // all the birds poop - so this is okay
+}
+interface ICanFly {
+ void fly();
+}
+class Sparrow extends Bird implements ICanFly {
+ String species;
+ Integer beakLength;
+ void fly() {
+ print("flap wings and fly low")
+ }
+ void poop() { ... }
+}
+class Pigeon extends Bird implements ICanFly {
+ void fly() {
+ print("fly on top of people and poop on their heads")
+ }
+ void poop() { ... }
+}
+class Kiwi extends Bird {
+ // no need to implement void fly() here
+ // because we're not implementing the ICanFly interface
+ // no compiler error here!
+ void poop() { ... }
+}
+```
+Q: didn't we modify existing code for this change to happen?
+
+ removed the `abstract void fly()` from the `Bird` class!
+Q: aren't we violating the OCP?
+ Not a violation of OCP
+ Your code should be designed from day-1 to follow the SOLID principles
+How will the code & main method look now?
+```java
+abstract class Bird extends Animal {
+}
+interface ICanFly {
+ void fly();
+}
+class Sparrow extends Bird implements ICanFly {
+ void fly() {
+ print("flap wings and fly low")
+ }
+}
+class Pigeon extends Bird implements ICanFly {
+ void fly() {
+ print("fly on top of people and poop on their heads")
+ }
+}
+class Kiwi extends Bird {
+}
+class ZooGame {
+ Bird getBirdObjectFromUserSelection() {
+ // this method can return Kiwi as well
+ }
+ void main() {
+ Bird b = getBirdObjectFromUserSelection()
+ if( b instanceof ICanFly ) {
+ // explicitly check if we're a Bird that also supports flying
+ // explicitly downcast the object
+ ((ICanFly) b).fly()
+ }
+ }
+}
+```
+-----------------------------------------------------------------------------
+✈️ What else can Fly?
+=====================
+```java
+abstract class Bird {
+ ...
+}
+interface ICanFly {
+ void fly();
+ void flapWings();
+ void kickToTakeOff();
+}
+class Sparrow extends Bird implements ICanFly {
+ void fly()
+ void flapWings();
+ void kickToTakeOff();
+}
+class Kiwi extends Bird {
+ // doesn't implement ICanFly
+}
+class Shaktiman implements ICanFly {
+ void fly() {
+ print("raise finger, spin, make noise")
+ }
+ void flapWings() {
+ // SORRY Shaktiman!
+ }
+}
+```
+How does a Bird fly?
+ - smallJump
+ - flapWings
+ - fly
+What else can fly?
+Airplanes, drones, Mummy ki Chappal, Kite (patang), Ball, Balloon, Shaktiman,
+Papa ki Pari
+>
+> ❓ Should these additional methods be part of the ICanFly interface?
+>
+> • Yes, obviously. All things methods are related to flying
+> • Nope. [send your reason in the chat]
+>
+==================================
+⭐ Interface Segregation Principle
+==================================
+- Keep your interfaces minimal
+- A user of your interface should not be forced to implement methods that it
+doesn't need
+How will you fix `ICanFly`?
+```java
+interface ICanFly {
+ void fly();
+}
+interface HasWings {
+ void flapWings();
+}
+interface HasLegs {
+ void kickToTakeOff();
+}
+```
+#### Another example:
+```java
+interface DatabaseCursor {
+ List<Row> find(String query)
+ List<Row> insert(String query)
+ List<Row> delete(String query)
+ List<Row> join(String query, String table1, String table2)
+}
+class SQLDatabaseCursor implements DatabaseCursor {
+ List<Row> find(String query)
+ List<Row> insert(String query)
+ List<Row> delete(String query)
+ List<Row> join(String query, String table1, String table2)
+}
+class MongoDatabaseCursor implements DatabaseCursor {
+ List<Row> find(String query)
+ List<Row> insert(String query)
+ List<Row> delete(String query)
+ // but MongoDB doesn't support joins!
+}
+```
+❓ Isn't this similar to LSP?
+ LSP - type system
+ ISP - design of interfaces
+❓ Isn't this just Single Responsibility Principle applied to interfaces?
+ SRP - code complexity
+ ISP - applies to any sort of API / contract
+🔗 All the SOLID principles are tightly linked
+-----------------------------------------------------------------------------
+🗑️ Design a Cage
+================
+```java
+interface IBowl { // High Level Abstraction
+ void feed(Animal animal);
+}
+class MeatBowl implements IBowl { // Low Level Implementation Detail
+ void feed(Animal animal) {
+ // measure the meat
+ // ensure right temperature
+ // add digestive enzymes
+ // serve
+ }
+}
+class FruitBowl implements IBowl { // Low Level Implementation Detail
+ void feed(Animal animal) {
+ // check for insects
+ // ..
+ }
+}
+interface IDoor { // High Level Abstraction
+ void resistAttack(Attack attack);
+}
+class IronDoor implements IDoor { // Low Level Implementation Detail
+ void resistAttack(Attack attack) {
+ if (attack.power < 100) {
+ print("resisted")
+ attack.animal.sufferDamage(10)
+ }
+ }
+}
+class WoodenDoor implements IDoor { // Low Level Implementation Detail
+ void resistAttack(Attack attack) {
+ if (attack.type == AttackType.SHARP) {
+ print("hole in door, but attack resisted")
+ }
+ else if (attack.type == AttackType.BLUNT) {
+ if (attack.power < 2) {
+ ...
+ }
+ }
+}
+class Cage1 {
+ // cage for tigers
+ IronDoor door = new IronDoor();
+ MeatBowl bowl = new MeatBowl();
+ List<Tiger> tigers;
+ public Cage1() {
+ this.tigers = Arrays.asList(
+ new Tiger("simba"),
+ new Tiger("musafa"),
+ )
+ }
+ void resistAttack(Attack attack) {
+ this.door.resistAttack(attack);
+ }
+ void feedAnimals() {
+ for(Tiger t: this.tigers)
+ this.bowl.feed(t)
+ }
+}
+class Cage2 {
+ // cage for sparrows
+ WoodenDoor door = new WoodenDoor();
+ FruitBowl bowl = new FruitBowl();
+ List<Sparrow> spparows;
+ public Cage2() {
+ this.sparrows = Arrays.asList(
+ new Sparrow("tweety"),
+ new Sparrow("shweety"),
+ )
+ }
+ void resistAttack(Attack attack) {
+ this.door.resistAttack(attack);
+ }
+ void feedAnimals() {
+ for(Sparrow s: this.sparrows)
+ this.bowl.feed(s)
+ }
+}
+class ZooGame {
+ void main() {
+ Cage1 tigerCage = new Cage1();
+ // what if I want to create a cage for Sparrows?
+ Cage sparrowCage = new Cage2();
+ }
+}
+```
+🐞 Code repetition! I literally copy pasted the Cage1 class and made minor
+changes!
+#### High Level vs Low Level code
+- High Level Abstraction
+ - tells you what to do, without telling you how to do it
+- Low Level Implementation Detail
+ - tell you exactly how something is done - the exact steps
+```
+interface abstract class interface
+ ------- --------- -------
+ IBowl Animal IDoor High Level Abstraction
+ ------- --------- -------
+ ║ ║ ║
+ ║ ║ ║
+┏━━━━━━━━━━┓ ┏━━━━━━━┓ ┏━━━━━━━━━━┓ Low Level
+┃ MeatBowl ┃ ┃ Tiger ┃ ┃ IronDoor ┃ Implementation Detail
+┗━━━━━━━━━━┛ ┗━━━━━━━┛ ┗━━━━━━━━━━┛
+ │ │ │
+ ╰───────────────╁───────────────╯
+ ┃
+ ┏━━━━━━━┓
+ ┃ Cage1 ┃
+┗━━━━━━━┛
+```
+`class Cage1` depends on low level implementation details `MeatBowl`, `Tiger`
+`IronDoor`
+=================================
+⭐ Dependency Inversion Principle what we want
+=================================
+- Your classes should NOT depend on low level implementation detals
+- They should only depend on high level abstractions
+```
+ ------- --------- -------
+ IBowl Animal IDoor High Level Abstraction
+ ------- --------- -------
+ │ │ │
+ ╰───────────────╁──────────────╯
+ ┃
+ ┏━━━━━━┓
+┃ Cage ┃
+┗━━━━━━┛
+```
+But how?
+=======================
+💉 Dependency Injection how to achieve that
+=======================
+- Do not create your dependencies yourself
+- Let your client/user create & inject them into you
+```java
+interface IDoor { ... } // High Level Abstraction
+class IronDoor implements IDoor { ... } // Low Level Implementation Detail
+class WoodenDoor implements IDoor { ... } // L L I D
+class AdamantiumDoor implements IDoor { ... } // L L I D
+interface IBowl { ... } // High Level Abstraction
+class MeatBowl implements IBowl { ... } // Low Level Implementation Detail
+class GrainBowl implements IBowl { ... } // L L I D
+class FruitBowl implements IBowl { ... } // L L I D
+class Cage {
+ // Generic Cage
+ IDoor door; // depend on Abstraction instead of Implementation Detail
+ IBowl bowl;
+ List<Animal> animal;
+ // injecting the dependencies via constructor
+ // vvvv vvvv vvvv
+ public Cage(IDoor door, IBowl bowl, List<Animal> animals) {
+ this.door = door;
+ this.bowl = bowl;
+ this.animals = animals;
+ }
+ void resistAttack(Attack attack) {
+ this.door.resistAttack(attack);
+ }
+ void feedAnimals() {
+ for(Animal a: this.animals)
+ this.bowl.feed(a)
+ }
+}
+class ZooGame {
+ void main() {
+ Cage tigerCage = new Cage(
+ new IronDoor(...),
+ new MeatBowl(...),
+ Arrays.asList(
+ new Tiger("simba"),
+ new Tiger("musafa")
+ )
+ )
+ Cage sparrowCage = new Cage(
+ new WoodenDoor(...),
+ new FruitBowl(...),
+ Arrays.asList(
+ new Sparrow("tweety"),
+ new Sparrow("shweety")
+ )
+ )
+ }
+}
+```
+I wrote less code, but my client got more features!
+Frameworks - backend/frontend - use SOLID principle heavily
+ - Spring (Java)
+ - React / Angular (Javascript)
+ - Django / Flask (Python)
+ - Rails (Ruby)
+ - Laravel (Php)
+ - Rocket (Rust)
+ - Flutter (Dart)
+Enterprise Code
+===============
+When you go to companies like Google
+ - you will "over engineered" code
+ - design patterns everywhere `EmployeePaymentStrategyBuilder`
+ - very long names everywhere `PaymentGatewayFactorySingleton`
+ - even when it is not strictly needed
+ They do this for a good reason - so that things don't break when the
+requirements change tomorrow
+If you're a dev who is not good at LLD & you end up clearing Google
+ - but you will have a very hard time
+ - you will not be able to understand the code
+ - be put into a PIP (Performance improvement proposal)
+If you're dev who is good at LLD
+ - 90% of the time you won't even have to read the code
+ - because the class name will tell you exactly what the class does!
+================
+🎁 Bonus Content
+================
+>
+> We all need people who will give us feedback.
+> That’s how we improve. 💬 Bill Gates
+>
+-------------
+🧩 Assignment
+-------------
+https://github.com/kshitijmishra23/low-level-designconcepts/tree/master/src/oops/SOLID/
+----------------------
+⭐ Interview Questions
+----------------------
+> ❓ Which of the following is an example of breaking
+> Dependency Inversion Principle?
+>
+> A) A high-level module that depends on a low-level module
+> through an interface
+>
+> B) A high-level module that depends on a low-level module directly
+>
+> C) A low-level module that depends on a high-level module
+> through an interface
+>
+> D) A low-level module that depends on a high-level module directly
+>
+> ❓ What is the main goal of the Interface Segregation Principle?
+>
+> A) To ensure that a class only needs to implement methods that are
+> actually required by its client
+>
+> B) To ensure that a class can be reused without any issues
+>
+> C) To ensure that a class can be extended without modifying its source code
+>
+> D) To ensure that a class can be tested without any issues
+>
+> ❓ Which of the following is an example of breaking
+> Liskov Substitution Principle?
+>
+> A) A subclass that overrides a method of its superclass and changes
+> its signature
+>
+> B) A subclass that adds new methods
+>
+> C) A subclass that can be used in place of its superclass without
+> any issues
+>
+> D) A subclass that can be reused without any issues
+>
+> ❓ How can we achieve the Interface Segregation Principle in our classes?
+>
+> A) By creating multiple interfaces for different groups of clients
+> B) By creating one large interface for all clients
+> C) By creating one small interface for all clients
+> D) By creating one interface for each class
+> ❓ Which SOLID principle states that a subclass should be able to replace
+> its superclass without altering the correctness of the program?
+>
+> A) Single Responsibility Principle
+> B) Open-Close Principle
+> C) Liskov Substitution Principle
+> D) Interface Segregation Principle
+>
+>
+> ❓ How can we achieve the Open-Close Principle in our classes?
+>
+> A) By using inheritance
+> B) By using composition
+> C) By using polymorphism
+> D) All of the above
+>
+# ============================ That's all, folks! ===========================
